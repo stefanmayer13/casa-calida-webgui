@@ -2,10 +2,14 @@
  * @author <a href="mailto:stefanmayer13@gmail.com">Stefan Mayer</a>
  */
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import { render } from 'react-dom';
+import Root from './containers/Root';
+import configureStore from './store/configureStore';
 
-ReactDOM.render(
-    <div>
-        Hello World!
-    </div>, document.getElementById('app'));
+const store = configureStore();
+
+render(
+    <Root store={store} />,
+    document.getElementById('app')
+);

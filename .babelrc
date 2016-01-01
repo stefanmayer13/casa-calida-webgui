@@ -5,6 +5,8 @@
         "transform-es2015-parameters",
         "transform-strict-mode",
         "syntax-jsx",
-        "transform-react-jsx"
+        "transform-react-jsx",
+        "transform-es2015-modules-commonjs",
+        "transform-es2015-destructuring"
     ]
 }
