@@ -2,6 +2,7 @@
  * @author <a href="mailto:stefanmayer13@gmail.com">Stefan Mayer</a>
  */
 
+import moment from 'moment';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { loadDevices, resetErrorMessage } from '../actions';
@@ -57,9 +58,11 @@ class App extends Component {
                         {device.sensors.length > 0 ? <h3>Sensors</h3> : null}
                         <ul>
                             {device.sensors
-                                .map((sensor) => typeof(sensor.value) !== 'undefined' ? (<li key={device._id + sensor.commandClass + sensor.key}>
-                                    {sensor.name}: {sensor.valueType === 'bool' ? sensor.value.toString() : sensor.value} {sensor.scale}
-                                </li>) : null
+                                .map((sensor) => typeof(sensor.value) !== 'undefined' ? (
+                                        <li key={device._id + sensor.commandClass + sensor.key}>
+                                            {sensor.name}: {sensor.valueType === 'bool' ? sensor.value.toString() : sensor.value} {sensor.scale} ({moment.unix(sensor.lastUpdate).fromNow()})
+                                        </li>
+                                    ) : null
                             )}
                         </ul>
                     </li>);
