@@ -51,16 +51,16 @@ class App extends Component {
                         {device.deviceType}<br/>
                         {device.vendor}<br/>
                         {battery.type ? (
-                            <span>Battery: {battery.count}x {battery.type} {battery.value}%)</span>
+                            <span>Battery: {battery.count}x {battery.type} {battery.value}%</span>
                         ) : null}<br/>
                         Description: {device.description ? device.description.en : ''}
                         {device.sensors.length > 0 ? <h3>Sensors</h3> : null}
                         <ul>
-                            {device.sensors.map((sensor) => {
-                                return (<li key={device._id + sensor.commandClass + sensor.key}>
+                            {device.sensors
+                                .map((sensor) => typeof(sensor.value) !== 'undefined' ? (<li key={device._id + sensor.commandClass + sensor.key}>
                                     {sensor.name}: {sensor.valueType === 'bool' ? sensor.value.toString() : sensor.value} {sensor.scale}
-                                </li>);
-                            })}
+                                </li>) : null
+                            )}
                         </ul>
                     </li>);
                 })}

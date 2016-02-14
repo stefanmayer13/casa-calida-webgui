@@ -1,9 +1,9 @@
 /**
  * @author <a href="mailto:stefanmayer13@gmail.com">Stefan Mayer</a>
  */
-var webpack = require('webpack');
-var RewirePlugin = require("rewire-webpack");
-var path = require('path');
+const webpack = require('webpack');
+const RewirePlugin = require("rewire-webpack");
+const path = require('path');
 
 module.exports = function(config) {
     config.set({

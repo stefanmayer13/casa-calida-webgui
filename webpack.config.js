@@ -17,7 +17,7 @@ module.exports = {
         },
         proxy: {
             '(/api*)': {
-                target: 'http://localhost:3000/',
+                target: 'http://www.casa-calida.com:3000/',
             }
         }
     },

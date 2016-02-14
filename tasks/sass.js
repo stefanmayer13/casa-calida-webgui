@@ -24,7 +24,7 @@ module.exports = {
                 cascade: false,
             }))
             .pipe(sourcemaps.write())
-            .on('error', function(err) {
+            .on('error', (err) => {
                 gutil.log(err.message);
             })
             .pipe(gulp.dest('css'));

@@ -12,15 +12,13 @@ function fetchDevices() {
     return {
         [CALL_API]: {
             types: [DEVICES_REQUEST, DEVICES_SUCCESS, DEVICES_FAILURE],
-            endpoint: `/devices`,
+            endpoint: `/v1/devices`,
         },
     };
 }
 
 export function loadDevices() {
-    return (dispatch) => {
-        return dispatch(fetchDevices());
-    };
+    return (dispatch) => dispatch(fetchDevices());
 }
 
 export const RESET_ERROR_MESSAGE = 'RESET_ERROR_MESSAGE';

@@ -2,13 +2,13 @@
  * @author <a href="mailto:stefanmayer13@gmail.com">Stefan Mayer</a>
  */
 
-var gulp = require('gulp');
-var del = require('del');
+const gulp = require('gulp');
+const del = require('del');
 
 require('babel-register');
 
 function getTask(name) {
-    return require('./tasks/' + name);
+    return require(`./tasks/${name}`);
 }
 
 gulp.task('default', ['check', 'sass', 'devserver', 'watch']);
@@ -17,7 +17,7 @@ gulp.task('default', ['check', 'sass', 'devserver', 'watch']);
 
 gulp.task('devserver', getTask('client').startDevServer);
 
-gulp.task('watch', function watch() {
+gulp.task('watch', () => {
     gulp.watch('scss/*.scss', ['sass']);
 });
 

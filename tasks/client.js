@@ -15,7 +15,7 @@ module.exports = {
             historyApiFallback: true,
             hot: true,
             proxy: webpackConfig.devServer.proxy,
-        }).listen(8080, 'localhost', function (err) {
+        }).listen(8080, 'localhost', (err) => {
             if (err) {
                 return gutil.log(err);
             }
