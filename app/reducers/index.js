@@ -3,6 +3,7 @@
  */
 
 import * as ActionTypes from '../actions';
+import auth from './auth';
 import { combineReducers } from 'redux';
 
 function devices(state = [], action) {
@@ -27,6 +28,7 @@ function errorMessage(state = null, action) {
 
 const rootReducer = combineReducers({
     devices,
+    auth,
     errorMessage,
 });
 

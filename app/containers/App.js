@@ -6,6 +6,7 @@ import moment from 'moment';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { loadDevices, resetErrorMessage } from '../actions';
+import { isLoggedIn } from '../actions/auth';
 
 class App extends Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class App extends Component {
 
     componentWillMount() {
         this.props.loadDevices();
+        this.props.checkLogin();
     }
 
     handleDismissClick(e) {
@@ -43,6 +45,7 @@ class App extends Component {
         const { devices } = this.props;
         return (
             <div>
+                Loggedin: {this.props.loggedIn ? 'yes': 'no'}<br/>
                 Registered devices:
                 <ul>
                 {devices.map((device) => {
@@ -75,8 +78,10 @@ class App extends Component {
 }
 
 App.propTypes = {
+    checkLogin: PropTypes.func.isRequired,
     devices: PropTypes.array.isRequired,
     loadDevices: PropTypes.func.isRequired,
+    loggedIn: PropTypes.bool.isRequired,
     errorMessage: PropTypes.string,
     resetErrorMessage: PropTypes.func.isRequired,
 };
@@ -84,11 +89,13 @@ App.propTypes = {
 function mapStateToProps(state) {
     return {
         devices: state.devices,
+        loggedIn: state.auth.loggedIn,
         errorMessage: state.errorMessage,
     };
 }
 
 export default connect(mapStateToProps, {
+    checkLogin: isLoggedIn,
     loadDevices,
     resetErrorMessage,
 })(App);
