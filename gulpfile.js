@@ -11,7 +11,9 @@ function getTask(name) {
     return require(`./tasks/${name}`);
 }
 
-gulp.task('default', ['check', 'sass', 'devserver', 'watch']);
+gulp.task('default', ['devserver']);
+
+//gulp.task('default', ['check', 'sass', 'devserver', 'watch']);
 
 //gulp.task('build', ['clean', 'check', 'sass-production', 'client-prod', 'copy-resources']);
 
@@ -21,8 +23,4 @@ gulp.task('watch', () => {
     gulp.watch('scss/*.scss', ['sass']);
 });
 
-gulp.task('check', getTask('helper').check);
-
 gulp.task('sass', getTask('sass').sass);
-
-gulp.task('test', getTask('testing').tests);
