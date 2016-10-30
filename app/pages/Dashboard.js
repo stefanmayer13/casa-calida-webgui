@@ -8,9 +8,9 @@ import Link from '../components/atoms/LanguageLink';
 
 const Dashboard = React.createClass({
     render() {
-        return <div>
-            <p><Message code="dashboard.welcome" /></p>
-        </div>;
+        return (<div>
+          <p><Message code="dashboard.welcome" /></p>
+        </div>);
     },
 });
 

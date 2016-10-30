@@ -2,7 +2,7 @@
  * @author <a href="mailto:stefan@stefanmayer.me">Stefan Mayer</a>
  */
 
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import ActionTypes from '../ActionTypes';
 
 function location(state = {}, action) {

@@ -2,7 +2,7 @@
  * @author <a href="mailto:stefan@stefanmayer.me">Stefan Mayer</a>
  */
 
-import {CALL_API} from '../middleware/api';
+import { CALL_API } from '../middleware/api';
 import {
     GET_SEOINFO,
     GET_SEOINFO_SUCCESS,
@@ -23,8 +23,8 @@ export function getSeoInfo(url) {
 }
 
 export function setSeoInfo(url) {
-    return function(dispatch) {
-        return dispatch(getSeoInfo(url))
+    return (dispatch) =>
+        dispatch(getSeoInfo(url))
             .then((data) => {
                 if (typeof document !== 'undefined' && data.data) {
                     document.title = data.data.title;
@@ -33,7 +33,7 @@ export function setSeoInfo(url) {
                         descriptionTag.content = data.data.description;
                     } else {
                         descriptionTag = document.createElement('meta');
-                        descriptionTag.name = "description";
+                        descriptionTag.name = 'description';
                         document.querySelector('head').appendChild(descriptionTag);
                     }
                     descriptionTag.content = data.data.description;
@@ -42,11 +42,10 @@ export function setSeoInfo(url) {
                         keywordsTag.content = data.data.keywords;
                     } else {
                         keywordsTag = document.createElement('meta');
-                        keywordsTag.name = "keywords";
+                        keywordsTag.name = 'keywords';
                         document.querySelector('head').appendChild(descriptionTag);
                     }
                     keywordsTag.content = data.data.keywords.join(',');
                 }
             });
-    };
 }

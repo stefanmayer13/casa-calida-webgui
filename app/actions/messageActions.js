@@ -2,8 +2,7 @@
  * @author <a href="mailto:stefan@stefanmayer.me">Stefan Mayer</a>
  */
 
-
-import {CALL_API} from '../middleware/api';
+import { CALL_API } from '../middleware/api';
 import {
     SET_LANGUAGE,
     GET_MESSAGES,
@@ -22,11 +21,11 @@ export function fetchMessages(language) {
             url: `v1/messages/${language}`,
         },
     };
-};
+}
 
 export function setLanguage(language) {
     return {
         type: SET_LANGUAGE,
         language,
     };
-};
+}

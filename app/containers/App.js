@@ -31,48 +31,48 @@ class App extends Component {
         }
 
         return (
-            <p style={{ backgroundColor: '#e99', padding: 10 }}>
-                <b>{errorMessage}</b>
-                {' '}
-                (<a href="#" onClick={this.handleDismissClick}>
+          <p style={{ backgroundColor: '#e99', padding: 10 }}>
+            <b>{errorMessage}</b>
+            {' '}
+            <a href="#" onClick={this.handleDismissClick}>
                     Dismiss
-                </a>)
-            </p>
+            </a>)
+          </p>
         );
     }
 
     render() {
         const { devices } = this.props;
         return (
-            <div>
-                Loggedin: {this.props.loggedIn ? 'yes': 'no'}<br/>
+          <div>
+            {this.props.loggedIn ? 'yes' : 'no'}<br />
                 Registered devices:
-                <ul>
-                {devices.map((device) => {
-                    const { battery } = device;
-                    return (<li key={device._id}>
-                        <h2>{device.name || device.deviceType}</h2>
-                        {device.deviceType}<br/>
-                        {device.vendor}<br/>
-                        {battery.type ? (
-                            <span>Battery: {battery.count}x {battery.type} {battery.value}%</span>
-                        ) : null}<br/>
-                        Description: {device.description ? device.description.en : ''}
-                        {device.sensors.length > 0 ? <h3>Sensors</h3> : null}
-                        <ul>
-                            {device.sensors
-                                .map((sensor) => typeof(sensor.value) !== 'undefined' ? (
-                                        <li key={device._id + sensor.commandClass + sensor.key}>
-                                            {sensor.name}: {sensor.valueType === 'bool' ? sensor.value.toString() : sensor.value} {sensor.scale} ({moment.unix(sensor.lastUpdate).fromNow()})
-                                        </li>
+            <ul>
+              {devices.map((device) => {
+                  const { battery } = device;
+                  return (<li key={device._id}>
+                    <h2>{device.name || device.deviceType}</h2>
+                    {device.deviceType}<br />
+                    {device.vendor}<br />
+                    {battery.type ? (
+                      <span>Battery: {battery.count}x {battery.type} {battery.value}%</span>
+                        ) : null}<br />
+                    {device.description ? device.description.en : ''}
+                    {device.sensors.length > 0 ? <h3>Sensors</h3> : null}
+                    <ul>
+                      {device.sensors
+                                .map(sensor => typeof (sensor.value) !== 'undefined' ? (
+                                  <li key={device._id + sensor.commandClass + sensor.key}>
+                                    {sensor.name}: {sensor.valueType === 'bool' ? sensor.value.toString() : sensor.value} {sensor.scale} ({moment.unix(sensor.lastUpdate).fromNow()})
+                                  </li>
                                     ) : null
                             )}
-                        </ul>
-                    </li>);
-                })}
-                </ul>
-                {this.renderErrorMessage()}
-            </div>
+                    </ul>
+                  </li>);
+              })}
+            </ul>
+            {this.renderErrorMessage()}
+          </div>
         );
     }
 }

@@ -4,14 +4,14 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import {Router} from 'react-router';
-import {Provider} from 'react-redux';
+import { Router } from 'react-router';
+import { Provider } from 'react-redux';
 
 import getRoutes from './routes';
 import configureStore from './store/configureStore';
-import {changeRoute} from './actions/routeActions';
-import {fetchMessages} from './actions/messageActions';
-import {setSeoInfo} from './actions/seoActions';
+import { changeRoute } from './actions/routeActions';
+import { fetchMessages } from './actions/messageActions';
+import { setSeoInfo } from './actions/seoActions';
 import history from './utils/history';
 
 const initialState = window.__PRELOADED_STATE__;
@@ -28,10 +28,10 @@ let initialDataSet;
 if (initialState && initialState.coredata && initialState.coredata.messages) {
     initialDataSet = Promise.resolve(); //
 } else {
-    //Get messages and seoInfo before rendering if needed
+    // Get messages and seoInfo before rendering if needed
     initialDataSet = Promise.all([
         store.dispatch(fetchMessages(location.pathname.split(['/'])[1])),
-        store.dispatch(setSeoInfo(location.pathname))
+        store.dispatch(setSeoInfo(location.pathname)),
     ]);
 }
 
@@ -42,18 +42,18 @@ initialDataSet.then(() => {
         window.React = React;
         console.log('Rendering App Client');
         render((
-            <Provider store={store}>
-                <div>
-                    <Router history={history}>{routes}</Router>
-                    {useDevTools ? <DevTools /> : null}
-                </div>
-            </Provider>), appRoot);
+          <Provider store={store}>
+            <div>
+              <Router history={history}>{routes}</Router>
+              {useDevTools ? <DevTools /> : null}
+            </div>
+          </Provider>), appRoot);
     } else {
         render(
-            <Provider store={store}>
-                <div>
-                    <Router history={history}>{routes}</Router>
-                </div>
-            </Provider>, appRoot);
+          <Provider store={store}>
+            <div>
+              <Router history={history}>{routes}</Router>
+            </div>
+          </Provider>, appRoot);
     }
 });

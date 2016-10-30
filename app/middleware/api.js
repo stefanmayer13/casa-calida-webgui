@@ -2,16 +2,16 @@
  * @author <a href="mailto:stefan@stefanmayer.me">Stefan Mayer</a>
  */
 
-import Superagent from "superagent";
-import ActionTypes from "../ActionTypes";
-import {browserHistory} from "react-router";
-import {assign, omit} from "lodash";
+import Superagent from 'superagent';
+import ActionTypes from '../ActionTypes';
+import { browserHistory } from 'react-router';
+import { assign, omit } from 'lodash';
 
 const csrfHeader = 'x-csrf-token';
 
-const withHeaders = (request) => {
-    return request.set('Accept', 'application/json');
-};
+const withHeaders = request =>
+     request.set('Accept', 'application/json')
+;
 
 function handleCSRF(store, response) {
     let header = null;
@@ -24,7 +24,7 @@ function handleCSRF(store, response) {
         type: ActionTypes.SET_CSRF,
         data: header ? header : store.getState().csrf.token,
     });
-    if (typeof(window) === 'undefined') {
+    if (typeof (window) === 'undefined') {
         return response;
     }
     if (response.res) {
@@ -52,7 +52,7 @@ function callApi(store, RequestLib, method, url, data, encoding) {
 export const CALL_API = Symbol('Call API');
 
 export function createApi(baseUrl = '', RequestLib = Superagent) {
-    return store => next => action => {
+    return store => next => (action) => {
         const callAPI = action[CALL_API];
         if (typeof callAPI === 'undefined') {
             return next(action);
@@ -74,26 +74,26 @@ export function createApi(baseUrl = '', RequestLib = Superagent) {
             return assign(omit(action, CALL_API), data);
         }
 
-        next(actionWith({type: requestType, data}));
-        return callApi(store, RequestLib, method, baseUrl + '/api/' + url, data, encoding)
+        next(actionWith({ type: requestType, data }));
+        return callApi(store, RequestLib, method, `${baseUrl}/api/${url}`, data, encoding)
             .then(response => next(actionWith({
                 data: response.body,
                 status: response.status,
                 type: successType,
             })))
-            .catch(TypeError, ReferenceError, function(e) {
+            .catch(TypeError, ReferenceError, (e) => {
                 if (process.env.NODE_ENV !== 'production') {
                     console.log(e.stack);
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 let result;
                 if ((error.status === 401 || error.status === 403)
                     && window.location.pathname.indexOf('/login') !== 0
                     && store.getState().auth.loggedIn) {
                     result = next({
                         type: ActionTypes.LOGIN_FAILURE,
-                        error: {message: 'security.authentication.required'},
+                        error: { message: 'security.authentication.required' },
                     });
                     browserHistory.push('/login');
                 } else {

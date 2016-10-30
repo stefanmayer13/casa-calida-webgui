@@ -14,11 +14,11 @@ function fetchDevices() {
     return {
         [CALL_API]: {
             types: [GET_DEVICES, GET_DEVICES_SUCCESS, GET_DEVICES_FAILURE],
-            endpoint: `/v1/devices`,
+            endpoint: '/v1/devices',
         },
     };
 }
 
 export function loadDevices() {
-    return (dispatch) => dispatch(fetchDevices());
+    return dispatch => dispatch(fetchDevices());
 }

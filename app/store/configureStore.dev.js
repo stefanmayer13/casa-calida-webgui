@@ -3,7 +3,7 @@
  */
 
 import { createStore, applyMiddleware, compose } from 'redux';
-import {persistState} from 'redux-devtools';
+import { persistState } from 'redux-devtools';
 import reducers from '../reducers';
 import DevTools from '../components/DevTools';
 import thunk from 'redux-thunk';
@@ -17,8 +17,8 @@ const finalCreateStore = compose(
 )(createStore);
 
 function getDebugSessionKey() {
-    if (typeof(window) === 'undefined') {
-        return null; //only on server-render;
+    if (typeof (window) === 'undefined') {
+        return null; // only on server-render;
     }
     const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
     return (matches && matches.length > 0) ? matches[1] : null;

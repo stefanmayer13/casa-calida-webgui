@@ -8,6 +8,6 @@ import Link from '../components/atoms/LanguageLink';
 
 export default React.createClass({
     render() {
-        return (<div><Message code="notfound" /><br/><Link to="/"><Message code="home" /></Link></div>);
+        return (<div><Message code="notfound" /><br /><Link to="/"><Message code="home" /></Link></div>);
     },
 });
