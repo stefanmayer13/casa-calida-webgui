@@ -7,23 +7,24 @@ import ActionTypes from '../ActionTypes';
 import { browserHistory } from 'react-router';
 import { assign, omit } from 'lodash';
 
-const csrfHeader = 'x-csrf-token';
+const csrfHeader = 'X-CSRFToken';
 
 const withHeaders = request =>
      request.set('Accept', 'application/json')
 ;
 
 function handleCSRF(store, response) {
-    let header = null;
-    if (response.res && response.res.header) {
-        header = response.res.header[csrfHeader];
-    } else if (response.header) {
-        header = response.header[csrfHeader];
+    if (typeof(document) !== 'undefined') {
+        const cookies = document.cookie.split('; ')
+            .filter(cookie => cookie.indexOf('csrftoken') !== -1);
+        if (cookies.length > 0) {
+            const csrftoken = cookies[0].split('=')['1'];
+            store.dispatch({
+                type: ActionTypes.SET_CSRF,
+                data: csrftoken,
+            });
+        }
     }
-    store.dispatch({
-        type: ActionTypes.SET_CSRF,
-        data: header ? header : store.getState().csrf.token,
-    });
     if (typeof (window) === 'undefined') {
         return response;
     }

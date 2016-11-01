@@ -45,11 +45,21 @@ function languages(state = [], action) {
     }
 }
 
+function csrf(state = '', action) {
+    switch (action.type) {
+        case ActionTypes.CSRF_SUCCESS:
+            return action.data;
+        default:
+            return state;
+    }
+}
+
 const coredataReducer = combineReducers({
     errors,
     messages,
     language,
     languages,
+    csrf,
 });
 
 export default coredataReducer;

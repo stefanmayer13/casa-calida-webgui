@@ -21,4 +21,10 @@ module.exports = keyMirror({
     GET_SEOINFO: null,
     GET_SEOINFO_SUCCESS: null,
     GET_SEOINFO_FAILURE: null,
+    LOGIN: null,
+    LOGIN_SUCCESS: null,
+    LOGIN_FAILURE: null,
+    LOGOUT: null,
+    LOGOUT_SUCCESS: null,
+    LOGOUT_FAILURE: null,
 });

@@ -5,14 +5,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistState } from 'redux-devtools';
 import reducers from '../reducers';
-import DevTools from '../components/DevTools';
 import thunk from 'redux-thunk';
 import api from '../middleware/api';
 
 const finalCreateStore = compose(
     applyMiddleware(thunk),
     applyMiddleware(api),
-    DevTools.instrument(),
     persistState(getDebugSessionKey())
 )(createStore);
 
@@ -25,7 +23,7 @@ function getDebugSessionKey() {
 }
 
 export default function configureStore(initialState) {
-    const store = finalCreateStore(reducers, initialState);
+    const store = finalCreateStore(reducers, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
     if (module.hot) {
         module.hot.accept('../reducers', () =>
             store.replaceReducer(require('../reducers'))

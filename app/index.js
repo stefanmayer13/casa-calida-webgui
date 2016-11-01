@@ -13,6 +13,7 @@ import { changeRoute } from './actions/routeActions';
 import { fetchMessages } from './actions/messageActions';
 import { setSeoInfo } from './actions/seoActions';
 import history from './utils/history';
+import { LOGIN_SUCCESS } from './ActionTypes';
 
 const initialState = window.__PRELOADED_STATE__;
 const store = configureStore(initialState);
@@ -35,17 +36,24 @@ if (initialState && initialState.coredata && initialState.coredata.messages) {
     ]);
 }
 
+try {
+    const token = localStorage.getItem('authtoken');
+    if (token) {
+        store.dispatch({
+            type: LOGIN_SUCCESS,
+            data: token,
+        });
+    }
+} catch (e) {console.log(e)}
+
 initialDataSet.then(() => {
     if (process.env.NODE_ENV !== 'production') {
-        const useDevTools = false;
-        const DevTools = require('./components/DevTools').default;
         window.React = React;
         console.log('Rendering App Client');
         render((
           <Provider store={store}>
             <div>
               <Router history={history}>{routes}</Router>
-              {useDevTools ? <DevTools /> : null}
             </div>
           </Provider>), appRoot);
     } else {
