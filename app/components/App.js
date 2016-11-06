@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import {shouldPureComponentUpdate} from 'react-pure-render';
 import {connect} from 'react-redux';
 import {fetchMessages} from '../actions/messageActions';
 import {setSeoInfo} from '../actions/seoActions';
@@ -16,6 +17,8 @@ const {
     } = React.PropTypes;
 
 class App extends React.Component {
+    shouldComponentUpdate = shouldPureComponentUpdate;
+
     static childContextTypes = {
         getMessage: func,
         getLanguage: func,

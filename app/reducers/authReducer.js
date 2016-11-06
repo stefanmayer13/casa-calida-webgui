@@ -33,7 +33,7 @@ function loggedIn(state = false, action) {
 function currentUser(state = null, action) {
     switch (action.type) {
         case ActionTypes.LOGIN_SUCCESS:
-            return action.data;
+            return action.data.token;
         case ActionTypes.LOGIN_FAILURE:
             return null;
         case ActionTypes.LOGOUT_SUCCESS:

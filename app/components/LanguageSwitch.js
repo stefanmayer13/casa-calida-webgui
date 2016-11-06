@@ -17,7 +17,7 @@ class LanguageSwitch extends React.Component {
         return (
             <ul>
                 {this.props.languages.map(language => {
-                    return <li key={language}><a href={'/' + language + path}>{language}</a></li>;
+                    return <li key={language.abbreviation}><a href={'/' + language.abbreviation + path}>{language.language}</a></li>;
                 })}
             </ul>
         );

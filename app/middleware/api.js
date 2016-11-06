@@ -8,6 +8,7 @@ import { browserHistory } from 'react-router';
 import { assign, omit } from 'lodash';
 
 const csrfHeader = 'X-CSRFToken';
+const authHeader = 'AUTHORIZATION';
 
 const withHeaders = request =>
      request.set('Accept', 'application/json')
@@ -28,7 +29,7 @@ function handleCSRF(store, response) {
     if (typeof (window) === 'undefined') {
         return response;
     }
-    if (response.res) {
+    if (response.response) {
         throw response;
     }
     return response;
@@ -36,12 +37,16 @@ function handleCSRF(store, response) {
 
 function callApi(store, RequestLib, method, url, data, encoding) {
     const csrfToken = store.getState().csrf.token;
+    const authToken = store.getState().auth.currentUser;
 
     let req = withHeaders(RequestLib[method](url)
         .withCredentials());
 
     if (csrfToken) {
         req = req.set(csrfHeader, csrfToken);
+    }
+    if (authToken) {
+        req = req.set(authHeader, `token=${authToken}`);
     }
     if ((method === 'put' || method === 'post') && !!data && encoding === 'form') {
         req.set('Content-Type', 'application/x-www-form-urlencoded');
@@ -81,13 +86,7 @@ export function createApi(baseUrl = '', RequestLib = Superagent) {
                 data: response.body,
                 status: response.status,
                 type: successType,
-            })))
-            .catch(TypeError, ReferenceError, (e) => {
-                if (process.env.NODE_ENV !== 'production') {
-                    console.log(e.stack);
-                }
-            })
-            .catch((error) => {
+            })), (error) => {
                 let result;
                 if ((error.status === 401 || error.status === 403)
                     && window.location.pathname.indexOf('/login') !== 0

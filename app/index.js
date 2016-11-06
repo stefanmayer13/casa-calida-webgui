@@ -41,7 +41,7 @@ try {
     if (token) {
         store.dispatch({
             type: LOGIN_SUCCESS,
-            data: token,
+            data: {token},
         });
     }
 } catch (e) {console.log(e)}
