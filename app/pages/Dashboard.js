@@ -11,6 +11,8 @@ import Link from '../components/atoms/LanguageLink';
 import { loadDevices } from '../actions/deviceActions';
 import { convertValueByType } from '../utils/converter';
 
+import SensorHistoryWrapper from '../components/SensorHistoryWrapper';
+
 const {
     func,
     } = React.PropTypes;
@@ -35,7 +37,8 @@ class Dashboard extends React.Component {
                 {sensors
                     .map(sensor => (
                             <li key={sensor.id}>
-                                {sensor.name || sensor.title}: {convertValueByType(sensor.valueType, sensor.lastValue.value)} {sensor.scale} ({moment(sensor.lastValue.updated).fromNow()})
+                                <p>{sensor.name || sensor.title}: {convertValueByType(sensor.valueType, sensor.lastValue.value)} {sensor.scale} ({moment(sensor.lastValue.updated).fromNow()})</p>
+                                <SensorHistoryWrapper sensorId={sensor.id.toString()} />
                             </li>
                         )
                     )}

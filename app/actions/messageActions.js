@@ -2,6 +2,7 @@
  * @author <a href="mailto:stefan@stefanmayer.me">Stefan Mayer</a>
  */
 
+import Constants from '../Constants';
 import { CALL_API } from '../middleware/api';
 import {
     SET_LANGUAGE,
@@ -11,6 +12,9 @@ import {
 } from '../ActionTypes';
 
 export function fetchMessages(language) {
+    if (Constants.SUPPORTEDLANGUAGES.indexOf(language) === -1) {
+        language = Constants.SUPPORTEDLANGUAGES[0];
+    }
     return {
         [CALL_API]: {
             types: [

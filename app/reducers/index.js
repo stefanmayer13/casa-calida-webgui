@@ -8,6 +8,7 @@ import route from './routeReducer';
 import csrf from './csrfReducer';
 import auth from './authReducer';
 import devices from './deviceReducer';
+import sensors from './sensorsReducer';
 
 const reducers = combineReducers({
     coredata,
@@ -15,6 +16,7 @@ const reducers = combineReducers({
     route,
     auth,
     devices,
+    sensors,
 });
 
 export default reducers;
