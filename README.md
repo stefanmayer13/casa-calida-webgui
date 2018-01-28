@@ -1,2 +1,2 @@
-# homecomfort
-WebApp to control the home automation created with Z-Wave and homecomfort.
+# CasaCalida
+WebApp to to access the home automation devices of CasaCalida.

@@ -1,0 +1,13 @@
+/**
+ * @author <a href="mailto:stefan@stefanmayer.me">Stefan Mayer</a>
+ */
+
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOGIN_FORCE_NEW_PASSWORD = 'LOGIN_FORCE_NEW_PASSWORD';
+export const LOGIN_FORCE_NEW_PASSWORD_ERROR = 'LOGIN_FORCE_NEW_PASSWORD_ERROR';
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
+export const TRANSLATIONS_SUCCESS = 'TRANSLATIONS_SUCCESS';
